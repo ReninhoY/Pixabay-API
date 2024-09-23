@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document3</title>
+    <style>
+        html,body{
+            height: 100%;
+        }
+        body {
+            display: flex;
+          justify-content: center;
+          align-items: center;  
+        }
+        main {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 160%;
+          height: 100%;
+        }
+        #container-textos {
+            width: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        #img{
+          width: 60%;
+          aspect-ratio: 16/9;
+          display: none;
+        }
+        #placeholder-img {
+            width: 60%;
+            aspect-ratio: 16/9;
+            background-color: green;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #gif {
+            width: 15%;
+        }
+      </style>
+  </head>
+  <body>
+      <main>
+        <div id="container-textos">
+            <h1>Buscador de Imagens</h1>
+            <input type="text">
+             <button>Pesquisar</button>
+        </div>
+            <div id="placeholder-img">
+                <img src="34338d26023e5515f6cc8969aa027bca.gif" alt="" id="gif">
+            </div>
+            <img src="" alt="" id="img">
+
+
+      </main>
+      <script>
+
+
+        fetch("https://api.unsplash.com/photos/?query=cat&client_id=jEqnOI-w4OG68zUyZb6GSA4XZ8zzrz_9Lo6PzgTyD4A")
+        .then((res)=>{
+            res.json()
+            .then((js)=>{
+                console.log(js)
+            })
+        })
+
+
+        let container = document.querySelector("#img")
+        let placeholder = document.querySelector("#placeholder-img")
+        let inputText = document.querySelector("input")
+        let tagP = document.querySelector("p")
+        let btn = document.querySelector("button")
+        let statusLoad = 0
+
+
+        btn.addEventListener('click',()=>{
+
+
+            let link = `https://pixabay.com/api/?key=44112753-52a3a95bca8301a0a35df4c52&q=${inputText.value}&image_type=photo`
+                fetch(link)
+            .then((res)=>{
+                res.json()
+                .then((jsonres)=>{
+                    container.style.display = "flex"
+                    placeholder.style.display = "none"
+                    container.src = jsonres.hits[0].largeImageURL
+                })
+            })
+            .catch((err)=>{
+                alert("Valor inserido inválido!")
+            })
+        })
+
+
+   
+      </script>
+</html>
+
+
+

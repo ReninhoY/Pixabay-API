@@ -172,7 +172,6 @@ section:nth-child(2) {
     border-radius: 50%;
     background-color: #424141;
     cursor: pointer;
-    user-select: none;
 }
 
 .navegacao-botao:nth-child(1) {
